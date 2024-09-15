@@ -1,11 +1,12 @@
-import { MantineProvider, AppShell } from "@mantine/core"
+import { MantineProvider, AppShell, Title } from "@mantine/core"
+import "@mantine/core/styles.css"
 
 function App() {
   return (
     <MantineProvider>
       <AppShell header={{ height: 60 }} padding="md">
         <AppShell.Header>
-          Piker
+          <Title order={1}>Piker</Title>
         </AppShell.Header>
         <AppShell.Main>
           <div className="row top-row">
