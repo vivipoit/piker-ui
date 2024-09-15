@@ -1,28 +1,26 @@
-import { MantineProvider, AppShell, Title } from "@mantine/core"
+import { createTheme, MantineProvider, AppShell, Title } from "@mantine/core"
 import "@mantine/core/styles.css"
+import { Stats } from "./components/Stats.tsx"
+
+const theme = createTheme({
+  breakpoints: {
+    xs: "30em",
+    sm: "48em",
+    md: "64em",
+    lg: "74em",
+    xl: "90em",
+  },
+})
 
 function App() {
   return (
-    <MantineProvider>
+    <MantineProvider theme={theme}>
       <AppShell header={{ height: 60 }} padding="md">
         <AppShell.Header>
           <Title order={1}>Piker</Title>
         </AppShell.Header>
         <AppShell.Main>
-          <div className="row top-row">
-            <div>
-              <h2>Total Invested Amount</h2>
-              <p>$ 6,000,000.00</p>
-            </div>
-            <div>
-              <h2>Number of Investments</h2>
-              <p>784</p>
-            </div>
-            <div>
-              <h2>Rate of Return</h2>
-              <p>38%</p>
-            </div>
-          </div>
+          <Stats />
           
           <div className="row chart-row">
             <div>
