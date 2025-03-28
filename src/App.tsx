@@ -1,7 +1,6 @@
 import { createTheme, MantineProvider, AppShell, Group, Title, Burger } from "@mantine/core"
 import "@mantine/core/styles.css"
 import '@mantine/charts/styles.css';
-import BagOfCash from "/bag-of-cash.png"
 import Router from "./components/Router/Router.tsx"
 import { useDisclosure } from '@mantine/hooks';
 
@@ -28,8 +27,7 @@ function App() {
         <AppShell.Header>
           <Group p="md">
             <Burger opened={opened} onClick={toggle} hiddenFrom="md" size="sm" />
-            <img src={BagOfCash} alt="Piker" height="50" />
-            <Title order={1}>Piker</Title>
+            <Title order={1}>💰 Piker</Title>
           </Group>
         </AppShell.Header>
         <AppShell.Main>
