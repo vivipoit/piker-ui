@@ -1,9 +1,8 @@
-import { createTheme, MantineProvider, AppShell, Group, Title } from "@mantine/core"
+import { createTheme, MantineProvider, AppShell, Group, Title, Anchor } from "@mantine/core"
 import "@mantine/core/styles.css"
 import '@mantine/charts/styles.css';
-import BagOfCash from "./../public/bag-of-cash.png"
-import { Stats } from "./components/Stats.tsx"
-import { Charts } from "./components/Charts.tsx"
+import BagOfCash from "/bag-of-cash.png"
+import Router from "./components/Router.tsx"
 
 const theme = createTheme({
   breakpoints: {
@@ -23,11 +22,12 @@ function App() {
           <Group p="md">
             <img src={BagOfCash} alt="Piker" height="50" />
             <Title order={1}>Piker</Title>
+            <Anchor href="/">Dashboard</Anchor>
+            <Anchor href="/manage">Manage</Anchor>
           </Group>
         </AppShell.Header>
         <AppShell.Main>
-          <Stats />
-          <Charts />
+          <Router />
         </AppShell.Main>
       </AppShell>
     </MantineProvider>
