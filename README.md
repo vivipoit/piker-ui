@@ -1,22 +1,29 @@
-# piker-ui
-An investment portfolio dashboard in React.
+# 💰 piker-ui
+A React frontend for an investment portfolio manager app.
 
 # Getting started locally
 
 Clone the repo
-`git clone git@github.com:vivipoit/piker-ui.git`
+````bash
+git clone git@github.com:vivipoit/piker-ui.git
+````
 
 Navigate into the directory
-`cd piker-ui`
+````bash
+cd piker-ui
+````
 
 Install packages (assuming you already have node installed)
-`npm install`
+````bash
+npm install
+````
 
 Run the local server
-`npm run dev`
+````bash
+npm run dev
+````
 
 The server is running! 😁 Visit the localhost URL.
-
 ````bash
   VITE v5.4.5  ready in 303 ms
 
@@ -25,9 +32,8 @@ The server is running! 😁 Visit the localhost URL.
   ➜  press h + enter to show help
 ````
 
-
 ## Screenshot
-<img width="1425" alt="Screenshot 2024-09-22 at 7 11 15 PM" src="https://github.com/user-attachments/assets/11f4504e-0fe3-4dd4-a557-35f10002baff">
+![Screenshot 2025-03-28 at 5 17 50 PM](https://github.com/user-attachments/assets/242268fc-0516-42f8-ae73-11cac2938189)
 
 ## Template
 React + TypeScript + Vite  
