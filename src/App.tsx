@@ -1,8 +1,9 @@
-import { createTheme, MantineProvider, AppShell, Group, Title, Anchor } from "@mantine/core"
+import { createTheme, MantineProvider, AppShell, Group, Title, Burger } from "@mantine/core"
 import "@mantine/core/styles.css"
 import '@mantine/charts/styles.css';
 import BagOfCash from "/bag-of-cash.png"
-import Router from "./components/Router.tsx"
+import Router from "./components/Router/Router.tsx"
+import { useDisclosure } from '@mantine/hooks';
 
 const theme = createTheme({
   breakpoints: {
@@ -15,15 +16,20 @@ const theme = createTheme({
 })
 
 function App() {
+  const [opened, { toggle }] = useDisclosure();
+
   return (
     <MantineProvider theme={theme}>
-      <AppShell header={{ height: 75 }} padding="md">
+      <AppShell
+        padding="md"
+        header={{ height: 75 }}
+        navbar={{ width: 150, breakpoint: 'md', collapsed: { mobile: !opened } }}
+      >
         <AppShell.Header>
           <Group p="md">
+            <Burger opened={opened} onClick={toggle} hiddenFrom="md" size="sm" />
             <img src={BagOfCash} alt="Piker" height="50" />
             <Title order={1}>Piker</Title>
-            <Anchor href="/">Dashboard</Anchor>
-            <Anchor href="/manage">Manage</Anchor>
           </Group>
         </AppShell.Header>
         <AppShell.Main>
