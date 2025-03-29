@@ -1,5 +1,5 @@
 import { Table } from '@mantine/core'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { SortableTableHeading } from './SortableTableHeading'
 import { SortableTableData } from './SortableTableData'
 
@@ -15,7 +15,7 @@ export const SortableTable: React.FC<SortableTableProps> = ({ data, defaultSortC
     const [sortOrder, setSortOrder] = useState(defaultSortOrder);
   
     const sortData = (newSortColumn: keyof typeof data[0], newSortOrder: string) => {
-        const sorted = [...sortedData].sort((a, b) => {
+        setSortedData([...sortedData].sort((a, b) => {
             const valA = a[newSortColumn];
             const valB = b[newSortColumn];
 
@@ -24,19 +24,19 @@ export const SortableTable: React.FC<SortableTableProps> = ({ data, defaultSortC
             }
 
             return newSortOrder === "asc" ? (valA as number) - (valB as number) : (valB as number) - (valA as number)
-        });
-
-        setSortColumn(newSortColumn)
-        setSortOrder(newSortOrder)
-        setSortedData(sorted)
+        }))
     }
+
+    useEffect(() => {
+        sortData(sortColumn, sortOrder)
+    }, [sortColumn, sortOrder]);
     
     return(
         <Table striped highlightOnHover withRowBorders={false}>
             <Table.Thead>
                 <Table.Tr>
                     { Object.keys(data[0]).map((key) =>
-                        <SortableTableHeading key={key} keyName={key} sortFunction={sortData} sortColumn={sortColumn} sortOrder={sortOrder} />
+                        <SortableTableHeading key={key} keyName={key} sortColumn={sortColumn} setSortColumn={setSortColumn} sortOrder={sortOrder} setSortOrder={setSortOrder}/>
                     ) }
                 </Table.Tr>
             </Table.Thead>

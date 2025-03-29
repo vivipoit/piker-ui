@@ -5,31 +5,37 @@ const UNSORTED_COLUMN_ICON_COLOR = 'gray.3'
 
 interface SortableTableHeadingProps {
     keyName: string;
-    sortFunction: (newSortColumn: string, newSortOrder: string) => void;
     sortColumn: string;
+    setSortColumn: (newSortColumn: string) => void;
     sortOrder: string;
+    setSortOrder: (newSortOrder: string) => void;
 }
 
-export const SortableTableHeading: React.FC<SortableTableHeadingProps> = ({ keyName, sortFunction, sortColumn, sortOrder }) => {
+export const SortableTableHeading: React.FC<SortableTableHeadingProps> = ({ keyName, sortColumn, setSortColumn, sortOrder, setSortOrder }) => {
+    const columnTitle = () => {
+        return keyName.replace(/([A-Z])/g, ' $1').replace(/^./, (match) => match.toUpperCase());
+    }
+
     const resolveIconColor = (iconColumn: string, iconOrder: string) => {
         if (iconColumn !== sortColumn) return UNSORTED_COLUMN_ICON_COLOR
         if (iconOrder !== sortOrder) return UNSORTED_COLUMN_ICON_COLOR
 
         return ''
     }
-
-    const columnTitle = () => {
-        return keyName.replace(/([A-Z])/g, ' $1').replace(/^./, (match) => match.toUpperCase());
-    }
     
+    const sortByThisColumn = (newSortOrder: string) => {
+        setSortColumn(keyName)
+        setSortOrder(newSortOrder)
+    }
+
     return(
         <Table.Th style={{ position: "relative", textAlign: "center" }}>
             {columnTitle()}
             <Box style={{ position: "absolute", right: 0, top: "50%", transform: "translateY(-50%)" }}>
-                <Anchor ms="sm" component="button" c={resolveIconColor(keyName, 'asc')} onClick={() => sortFunction(keyName, 'asc')}>
+                <Anchor ms="sm" component="button" c={resolveIconColor(keyName, 'asc')} onClick={() => sortByThisColumn('asc')}>
                     <IconArrowUp />
                 </Anchor>
-                <Anchor component="button" c={resolveIconColor(keyName, 'desc')} onClick={() => sortFunction(keyName, 'desc')}>
+                <Anchor component="button" c={resolveIconColor(keyName, 'desc')} onClick={() => sortByThisColumn('desc')}>
                     <IconArrowDown />
                 </Anchor>
             </Box>
