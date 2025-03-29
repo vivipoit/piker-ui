@@ -1,4 +1,4 @@
-import { Paper, Title, Flex, Table, NumberFormatter, Anchor } from '@mantine/core'
+import { Paper, Title, Flex, Table, NumberFormatter, Anchor, Box } from '@mantine/core'
 import { IconArrowUp, IconArrowDown } from '@tabler/icons-react';
 import { useState } from "react";
 
@@ -52,49 +52,49 @@ export const AssetsTable: React.FC = () => {
       <Table striped highlightOnHover withRowBorders={false}>
         <Table.Thead>
           <Table.Tr>
-            <Table.Th>
-              <Flex justify="Center">
-                Ticker
+            <Table.Th style={{ position: "relative", textAlign: "center" }}>
+              Ticker
+              <Box style={{ position: "absolute", right: 0, top: "50%", transform: "translateY(-50%)" }}>
                 <Anchor ms="sm" component="button" c={resolveIconColor('ticker', 'asc')} onClick={() => sortAssets('ticker', 'asc')}>
                   <IconArrowUp />
                 </Anchor>
                 <Anchor component="button" c={resolveIconColor('ticker', 'desc')} onClick={() => sortAssets('ticker', 'desc')}>
                   <IconArrowDown />
                 </Anchor>
-              </Flex>
+              </Box>
             </Table.Th>
-            <Table.Th>
-              <Flex justify="Center">
-                Sector
+            <Table.Th style={{ position: "relative", textAlign: "center" }}>
+              Sector
+              <Box style={{ position: "absolute", right: 0, top: "50%", transform: "translateY(-50%)" }}>
                 <Anchor ms="sm" component="button" c={resolveIconColor('sector', 'asc')} onClick={() => sortAssets('sector', 'asc')}>
                   <IconArrowUp />
                 </Anchor>
                 <Anchor component="button" c={resolveIconColor('sector', 'desc')} onClick={() => sortAssets('sector', 'desc')}>
                   <IconArrowDown />
                 </Anchor>
-              </Flex>
+              </Box>
             </Table.Th>
-            <Table.Th>
-              <Flex justify="Center">
-                Country
+            <Table.Th style={{ position: "relative", textAlign: "center" }}>
+              Country
+              <Box style={{ position: "absolute", right: 0, top: "50%", transform: "translateY(-50%)" }}>
                 <Anchor ms="sm" component="button" c={resolveIconColor('country', 'asc')} onClick={() => sortAssets('country', 'asc')}>
                   <IconArrowUp />
                 </Anchor>
                 <Anchor component="button" c={resolveIconColor('country', 'desc')} onClick={() => sortAssets('country', 'desc')}>
                   <IconArrowDown />
                 </Anchor>
-              </Flex>
+              </Box>
             </Table.Th>
-            <Table.Th>
-              <Flex justify="Flex-end">
-                Latest Price
+            <Table.Th style={{ position: "relative", textAlign: "center" }}>
+              LatestPrice
+              <Box style={{ position: "absolute", right: 0, top: "50%", transform: "translateY(-50%)" }}>
                 <Anchor ms="sm" component="button" c={resolveIconColor('latestPrice', 'asc')} onClick={() => sortAssets('latestPrice', 'asc')}>
                   <IconArrowUp />
                 </Anchor>
                 <Anchor component="button" c={resolveIconColor('latestPrice', 'desc')} onClick={() => sortAssets('latestPrice', 'desc')}>
                   <IconArrowDown />
                 </Anchor>
-              </Flex>
+              </Box>
             </Table.Th>
           </Table.Tr>
         </Table.Thead>
