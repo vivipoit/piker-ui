@@ -1,5 +1,5 @@
 import { Paper, Title, Flex, Table, NumberFormatter, Anchor } from '@mantine/core'
-import { IconSortAscendingLetters, IconSortAscendingNumbers } from '@tabler/icons-react';
+import { IconArrowUp, IconArrowDown } from '@tabler/icons-react';
 import { useState } from "react";
 
 const UNSORTED_COLUMN_ICON_COLOR = 'gray.3'
@@ -17,22 +17,31 @@ export const AssetsTable: React.FC = () => {
     { ticker: 'BAC', sector: 'Financials', country: 'USA', latestPrice: 7.48 },
   ]
   const [sortedAssets, setSortedAssets] = useState(assets);
-  const [sortedByColumn, setSortedByColumn] = useState('');
+  const [sortColumn, setSortColumn] = useState('');
+  const [sortOrder, setSortOrder] = useState('');
   
-  const sortAssets = (column: keyof typeof assets[0]) => {
+  const sortAssets = (newSortColumn: keyof typeof assets[0], newSortOrder: string) => {
     const sorted = [...sortedAssets].sort((a, b) => {
-      const valA = a[column];
-      const valB = b[column];
+      const valA = a[newSortColumn];
+      const valB = b[newSortColumn];
 
-        if (typeof valA === "string" && typeof valB === "string") {
-          return valA.localeCompare(valB);
-        }
+      if (typeof valA === "string" && typeof valB === "string") {
+        return newSortOrder === "asc" ? valA.localeCompare(valB) : valB.localeCompare(valA);
+      }
 
-        return (valA as number) - (valB as number);
+      return newSortOrder === "asc" ? (valA as number) - (valB as number) : (valB as number) - (valA as number)
     });
 
-    setSortedByColumn(column)
+    setSortColumn(newSortColumn)
+    setSortOrder(newSortOrder)
     setSortedAssets(sorted)
+  }
+
+  const resolveIconColor = (iconColumn: string, iconOrder: string) => {
+    if (iconColumn !== sortColumn) return UNSORTED_COLUMN_ICON_COLOR
+    if (iconOrder !== sortOrder) return UNSORTED_COLUMN_ICON_COLOR
+
+    return ''
   }
   
   return(
@@ -46,32 +55,44 @@ export const AssetsTable: React.FC = () => {
             <Table.Th>
               <Flex justify="Center">
                 Ticker
-                <Anchor component="button" c={sortedByColumn !== 'ticker' ? UNSORTED_COLUMN_ICON_COLOR : ''} onClick={() => sortAssets('ticker')}>
-                  <IconSortAscendingLetters />
+                <Anchor ms="sm" component="button" c={resolveIconColor('ticker', 'asc')} onClick={() => sortAssets('ticker', 'asc')}>
+                  <IconArrowUp />
+                </Anchor>
+                <Anchor component="button" c={resolveIconColor('ticker', 'desc')} onClick={() => sortAssets('ticker', 'desc')}>
+                  <IconArrowDown />
                 </Anchor>
               </Flex>
             </Table.Th>
             <Table.Th>
               <Flex justify="Center">
                 Sector
-                <Anchor component="button" c={sortedByColumn !== 'sector' ? UNSORTED_COLUMN_ICON_COLOR : ''} onClick={() => sortAssets('sector')}>
-                  <IconSortAscendingLetters />
+                <Anchor ms="sm" component="button" c={resolveIconColor('sector', 'asc')} onClick={() => sortAssets('sector', 'asc')}>
+                  <IconArrowUp />
+                </Anchor>
+                <Anchor component="button" c={resolveIconColor('sector', 'desc')} onClick={() => sortAssets('sector', 'desc')}>
+                  <IconArrowDown />
                 </Anchor>
               </Flex>
             </Table.Th>
             <Table.Th>
               <Flex justify="Center">
                 Country
-                <Anchor component="button" c={sortedByColumn !== 'country' ? UNSORTED_COLUMN_ICON_COLOR : ''} onClick={() => sortAssets('country')}>
-                  <IconSortAscendingLetters />
+                <Anchor ms="sm" component="button" c={resolveIconColor('country', 'asc')} onClick={() => sortAssets('country', 'asc')}>
+                  <IconArrowUp />
+                </Anchor>
+                <Anchor component="button" c={resolveIconColor('country', 'desc')} onClick={() => sortAssets('country', 'desc')}>
+                  <IconArrowDown />
                 </Anchor>
               </Flex>
             </Table.Th>
             <Table.Th>
               <Flex justify="Flex-end">
                 Latest Price
-                <Anchor component="button" c={sortedByColumn !== 'latestPrice' ? UNSORTED_COLUMN_ICON_COLOR : ''} onClick={() => sortAssets('latestPrice')}>
-                  <IconSortAscendingNumbers />
+                <Anchor ms="sm" component="button" c={resolveIconColor('latestPrice', 'asc')} onClick={() => sortAssets('latestPrice', 'asc')}>
+                  <IconArrowUp />
+                </Anchor>
+                <Anchor component="button" c={resolveIconColor('latestPrice', 'desc')} onClick={() => sortAssets('latestPrice', 'desc')}>
+                  <IconArrowDown />
                 </Anchor>
               </Flex>
             </Table.Th>
