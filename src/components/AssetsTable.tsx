@@ -17,8 +17,8 @@ export const AssetsTable: React.FC = () => {
     { ticker: 'BAC', sector: 'Financials', country: 'USA', latestPrice: 7.48 },
   ]
   const [sortedAssets, setSortedAssets] = useState(assets);
-  const [sortColumn, setSortColumn] = useState('');
-  const [sortOrder, setSortOrder] = useState('');
+  const [sortColumn, setSortColumn] = useState('ticker');
+  const [sortOrder, setSortOrder] = useState('asc');
   
   const sortAssets = (newSortColumn: keyof typeof assets[0], newSortOrder: string) => {
     const sorted = [...sortedAssets].sort((a, b) => {
