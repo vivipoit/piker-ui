@@ -16,8 +16,8 @@ export const SortableTableHeading: React.FC<SortableTableHeadingProps> = ({ keyN
         return keyName.replace(/([A-Z])/g, ' $1').replace(/^./, (match) => match.toUpperCase());
     }
 
-    const resolveIconColor = (iconColumn: string, iconOrder: string) => {
-        if (iconColumn !== sortColumn) return UNSORTED_COLUMN_ICON_COLOR
+    const resolveIconColor = (iconOrder: string) => {
+        if (keyName !== sortColumn) return UNSORTED_COLUMN_ICON_COLOR
         if (iconOrder !== sortOrder) return UNSORTED_COLUMN_ICON_COLOR
 
         return ''
@@ -32,10 +32,10 @@ export const SortableTableHeading: React.FC<SortableTableHeadingProps> = ({ keyN
         <Table.Th style={{ position: "relative", textAlign: "center" }}>
             {columnTitle()}
             <Box style={{ position: "absolute", right: 0, top: "50%", transform: "translateY(-50%)" }}>
-                <Anchor ms="sm" component="button" c={resolveIconColor(keyName, 'asc')} onClick={() => sortByThisColumn('asc')}>
+                <Anchor ms="sm" component="button" c={resolveIconColor('asc')} onClick={() => sortByThisColumn('asc')}>
                     <IconArrowUp />
                 </Anchor>
-                <Anchor component="button" c={resolveIconColor(keyName, 'desc')} onClick={() => sortByThisColumn('desc')}>
+                <Anchor component="button" c={resolveIconColor('desc')} onClick={() => sortByThisColumn('desc')}>
                     <IconArrowDown />
                 </Anchor>
             </Box>
