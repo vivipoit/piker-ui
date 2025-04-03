@@ -6,7 +6,7 @@ export const Navigation = () => {
     const navigate = useNavigate();
 
     return (
-        <Tabs orientation="vertical" placement="right" value={location.pathname} onChange={(path) => navigate(path)}>
+        <Tabs orientation="vertical" placement="right" value={location.pathname} onChange={(path) => navigate(path ?? '/')}>
             <Tabs.List>
                 <Tabs.Tab value="/">Dashboard</Tabs.Tab>
                 <Tabs.Tab value="/manage">Manage</Tabs.Tab>
